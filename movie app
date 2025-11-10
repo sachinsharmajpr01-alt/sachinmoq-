@@ -1,0 +1,52 @@
+import pandas as pd
+
+#  Movie database
+movies = [
+    {'Title': 'Inception', 'Genre': 'Sci-Fi', 'Rating': 8.8},
+    {'Title': 'The Dark Knight', 'Genre': 'Action', 'Rating': 9.0},
+    {'Title': 'Interstellar', 'Genre': 'Sci-Fi', 'Rating': 8.6},
+    {'Title': 'Parasite', 'Genre': 'Thriller', 'Rating': 8.6},
+    {'Title': 'Coco', 'Genre': 'Animation', 'Rating': 8.4},
+    {'Title': 'Avengers: Endgame', 'Genre': 'Action', 'Rating': 8.4},
+    {'Title': 'The Godfather', 'Genre': 'Crime', 'Rating': 9.2}
+]
+
+df = pd.DataFrame(movies)
+
+#  Welcome screen
+print(" Welcome to Sachin Q!")
+print("Browse movies by genre or rating.\n")
+
+# User options
+while True:
+    print("Options:")
+    print("1. Show all movies")
+    print("2. Filter by genre")
+    print("3. Filter by rating")
+    print("4. Exit")
+
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == '1':
+        print("\n All Movies:\n")
+        print(df.to_string(index=False))
+    elif choice == '2':
+        genre = input("Enter genre (e.g., Action, Sci-Fi): ").title()
+        filtered = df[df['Genre'] == genre]
+        print(f"\n Movies in {genre}:\n")
+        print(filtered.to_string(index=False) if not filtered.empty else "No movies found.")
+    elif choice == '3':
+        try:
+            min_rating = float(input("Enter minimum rating (e.g., 8.5): "))
+            filtered = df[df['Rating'] >= min_rating]
+            print(f"\n⭐ Movies with rating >= {min_rating}:\n")
+            print(filtered.to_string(index=False) if not filtered.empty else "No movies found.")
+        except ValueError:
+            print("Please enter a valid number.")
+    elif choice == '4':
+        print("👋 Thanks for using Sachin Q!")
+        break
+    else:
+        print("Invalid choice. Try again.")
+
+    print("\n" + "-"*40 + "\n")
