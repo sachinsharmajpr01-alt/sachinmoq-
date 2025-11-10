@@ -35,39 +35,4 @@ class sachinmoqApp:
         tk.Label(self.root, text="Number of tickets:", font=("Helvetica", 12)).pack()
         tk.Entry(self.root, textvariable=self.ticket_count, width=5).pack(pady=5)
 
-        # Book button
-        tk.Button(self.root, text="Book Tickets", command=self.book_tickets, bg="green", fg="white").pack(pady=10)
-
-    def book_tickets(self):
-        movie = self.selected_movie.get()
-        tickets = self.ticket_count.get()
-
-        if not movie:
-            messagebox.showerror("Error", "Please select a movie.")
-            return
-        if tickets <= 0:
-            messagebox.showerror("Error", "Number of tickets must be at least 1.")
-            return
-
-        details = movies[movie]
-        total = details["price"] * tickets
-        time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-        receipt = (
-            f"🎟️ Booking Confirmed!\n\n"
-            f"Movie: {movie}\n"
-            f"Showtime: {details['time']}\n"
-            f"Tickets: {tickets}\n"
-            f"Price per ticket: ₹{details['price']}\n"
-            f"Total amount: ₹{total}\n"
-            f"Booking Time: {time_now}\n\n"
-            f"🎉 Enjoy your movie!"
-        )
-
-        messagebox.showinfo("Receipt", receipt)
-
-# Run the app
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = sachinmoqApp(root)
-    root.mainloop()
+    
